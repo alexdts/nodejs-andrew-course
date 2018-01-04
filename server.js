@@ -46,6 +46,12 @@ app.get('/', (req, res) => { /* me to app.get dimiourgoume ena HTTP get request.
    
 });
 
+app.get('/projects', (req, res) => {
+  res.render('projects.hbs', {
+    pageTitle: 'Projects'
+  })
+})
+
 app.get('/about', (req, res) => {
   res.render('about.hbs', { /* ws deftero orisma sto res.render orizoume ena antikimeno gia na kanoume dinamika allages stis selides mas */
     pageTitle: 'About Page',
