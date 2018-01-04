@@ -2,6 +2,7 @@ const express = require('express');
 const hbs = require('hbs'); /* view engine tou handlebars gia to express */
 const fs = require('fs');
 
+const port = process.env.PORT || 3000; /* gia na mporei to heroku na orisei diko tou port sto app mas */
 const app = express();
 
 hbs.registerHelper('getCurrentYear', () => { /* isxiei gia ola ta routes */
@@ -16,18 +17,18 @@ hbs.registerPartials(__dirname + '/views/partials'); /* orizoume to path gia ta 
 app.set('view engine', 'hbs');
 
 /* MIDDLEWARE */
-app.use((req, res, next) => { /* me tin xrish tis methodou use dimiourgoume middlewares */
-  const now = new Date().toString();
-  const log = `${now}: ${req.method} ${req.url}`;
+// app.use((req, res, next) => { /* me tin xrish tis methodou use dimiourgoume middlewares */
+//   const now = new Date().toString();
+//   const log = `${now}: ${req.method} ${req.url}`;
 
-  console.log(log);
-  fs.appendFile('server.log', log + '\n', (err) => {
-    if (err) {
-      console.log('Unable to append to server.log');
-    }
-  });
-  next();
-});
+//   console.log(log);
+//   fs.appendFile('server.log', log + '\n', (err) => {
+//     if (err) {
+//       console.log('Unable to append to server.log');
+//     }
+//   });
+//   next();
+// });
 
 /* app.use((req, res, next) => {
   res.render('maintenance.hbs')
@@ -57,6 +58,6 @@ app.get('/bad', (req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log('Server is up on port 3000');
+app.listen(port, () => {
+  console.log(`Server is up on port ${port}`);
 });
